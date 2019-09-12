@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="App\Repository\CatalogRepository")
  */
 class Catalog
@@ -28,6 +30,44 @@ class Catalog
      * @ORM\OneToMany(targetEntity="Document", mappedBy="catalog", cascade={"persist", "remove"})
      */
     private $documents;
+
+    /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
+     */
+    private $lft;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(type="integer")
+     */
+    private $lvl;
+
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(type="integer")
+     */
+    private $rgt;
+
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="tree_root", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $root;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @ORM\OrderBy({"lft" = "ASC"})
+     */
+    private $children;
 
     public function __construct()
     {
@@ -69,5 +109,20 @@ class Catalog
     public function removeDocument(Document $document)
     {
         $this->documents->remove($document);
+    }
+
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    public function setParent(Catalog $parent = null)
+    {
+        $this->parent = $parent;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
     }
 }
