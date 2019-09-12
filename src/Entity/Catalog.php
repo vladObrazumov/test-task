@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +22,18 @@ class Catalog
      */
     private $name;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Document", mappedBy="catalog", cascade={"persist", "remove"})
+     */
+    private $documents;
+
+    public function __construct()
+    {
+        $this->documents = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,5 +49,25 @@ class Catalog
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getDocuments(): ArrayCollection
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(ArrayCollection $documents): void
+    {
+        $this->documents = $documents;
+    }
+
+    public function addDocument(Document $document)
+    {
+        $this->documents->add($document);
+    }
+
+    public function removeDocument(Document $document)
+    {
+        $this->documents->remove($document);
     }
 }

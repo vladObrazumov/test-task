@@ -21,6 +21,14 @@ class Document
      */
     private $name;
 
+    /**
+     * @var Catalog
+     *
+     * @ORM\ManyToOne(targetEntity="Catalog", inversedBy="documents")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $catalog;
+
     public function getId(): ?int
     {
         return $this->id;
