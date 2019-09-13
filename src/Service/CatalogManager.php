@@ -31,6 +31,7 @@ class CatalogManager
     {
         $catalog = new Catalog();
         $catalog->setName($data['catalog_name']);
+        $catalog->setId((int)$data['identity']); //i am not sure here because we don't know what expect from API
         if (array_key_exists('documents', $data)) {
             foreach ($data['documents'] as $documentData) {
                 $catalog->addDocument($this->documentManager->createDocumentFromPureData($documentData));

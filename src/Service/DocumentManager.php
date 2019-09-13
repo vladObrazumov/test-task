@@ -14,6 +14,7 @@ class DocumentManager
     {
         $document = new Document();
         $document->setName($data['doc_name']);
+        $document->setId((int)$data['doc_id']);
         return $document;
     }
 }
