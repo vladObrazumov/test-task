@@ -26,7 +26,7 @@ class IntutorService
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getData()
+    public function getCatalogs()
     {
         $response = $this->client->request("GET", self::VLAD_API_URI);
         return $response->getBody()->getContents();
