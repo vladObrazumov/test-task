@@ -20,6 +20,8 @@ class Catalog
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -33,7 +35,7 @@ class Catalog
 
     /**
      * @Gedmo\TreeLeft
-     * @ORM\Column(name="lft", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $lft;
 
@@ -50,6 +52,8 @@ class Catalog
     private $rgt;
 
     /**
+     * @var Catalog
+     *
      * @Gedmo\TreeRoot
      * @ORM\ManyToOne(targetEntity="Catalog")
      * @ORM\JoinColumn(name="tree_root", referencedColumnName="id", onDelete="CASCADE")
@@ -57,6 +61,8 @@ class Catalog
     private $root;
 
     /**
+     * @var Catalog
+     *
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Catalog", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
@@ -64,6 +70,8 @@ class Catalog
     private $parent;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Catalog", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
@@ -72,6 +80,7 @@ class Catalog
     public function __construct()
     {
         $this->documents = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,33 +105,44 @@ class Catalog
         return $this->documents;
     }
 
-    public function setDocuments(ArrayCollection $documents): void
+    public function setDocuments(ArrayCollection $documents): self
     {
         $this->documents = $documents;
+
+        return $this;
     }
 
-    public function addDocument(Document $document)
+    public function addDocument(Document $document): void
     {
         $this->documents->add($document);
+        $document->setCatalog($this);
     }
 
-    public function removeDocument(Document $document)
+    public function removeDocument(Document $document): void
     {
         $this->documents->remove($document);
     }
 
-    public function getRoot()
+    public function getRoot(): ?Catalog
     {
         return $this->root;
     }
 
-    public function setParent(Catalog $parent = null)
+    public function setParent(Catalog $parent = null): self
     {
         $this->parent = $parent;
+
+        return $this;
     }
 
-    public function getParent()
+    public function getParent(): Catalog
     {
         return $this->parent;
+    }
+
+    public function addChild(Catalog $child): void
+    {
+        $this->children->add($child);
+        $child->setParent($this);
     }
 }
