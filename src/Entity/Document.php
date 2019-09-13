@@ -45,4 +45,14 @@ class Document
 
         return $this;
     }
+
+    public function getCatalog(): Catalog
+    {
+        return $this->catalog;
+    }
+
+    public function setCatalog(Catalog $catalog): void
+    {
+        $this->catalog = $catalog;
+    }
 }
