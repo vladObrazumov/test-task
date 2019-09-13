@@ -51,8 +51,10 @@ class Document
         return $this->catalog;
     }
 
-    public function setCatalog(Catalog $catalog): void
+    public function setCatalog(Catalog $catalog): self
     {
         $this->catalog = $catalog;
+
+        return $this;
     }
 }
