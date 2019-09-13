@@ -39,11 +39,14 @@ class FetchDataFromApiCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $data = json_decode($this->intutorService->getCatalogs(), true);
-            $this->catalogManager->createCatalogsFromPureData($data);
+            $arrayOfCatalogs = $this->intutorService->getCatalogs();
+            $this->catalogManager->createCatalogsFromPureData($arrayOfCatalogs);
         } catch (GuzzleException $e) {
             //in fact we must use logger like monolog here
             $output->writeln("We got error while requesting data, error message: " . $e->getMessage());
+        } catch (\Exception $e) {
+            //in fact we must use logger like monolog here
+            $output->writeln("Can't parse the json, error message: " . $e->getMessage());
         }
     }
 }

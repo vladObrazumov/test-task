@@ -23,12 +23,18 @@ class IntutorService
     }
 
     /**
-     * @return string
+     * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
      */
-    public function getCatalogs()
+    public function getCatalogs(): array
     {
         $response = $this->client->request("GET", self::VLAD_API_URI);
-        return $response->getBody()->getContents();
+        $arrayOfCatalogs = json_decode($response->getBody()->getContents(), true);
+        if ($arrayOfCatalogs === null) {
+            throw new \Exception("Json can't be decoded");
+        }
+
+        return $arrayOfCatalogs;
     }
 }
