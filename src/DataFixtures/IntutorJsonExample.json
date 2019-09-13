@@ -1,0 +1,99 @@
+[
+  {
+    "identity": "49392342",
+    "catalog_name": "1. Financial data",
+    "catalogs": [
+      {
+        "identity": "290234223",
+        "catalog_name": "1.1 Revenue",
+        "catalogs": [
+          {
+            "identity": "53424353",
+            "catalog_name": "1.1.1 Google ads",
+            "documents": [
+              {
+                "doc_id": "224",
+                "doc_name": "revenue2019.pdf"
+              }
+            ]
+          },
+          {
+            "identity": "534534111",
+            "catalog_name": "1.1.2 Yahoo ads",
+            "documents": [
+              {
+                "doc_id": "2654",
+                "doc_name": "revenue2017.pdf"
+              },
+              {
+                "doc_id": "2655",
+                "doc_name": "revenue2018.pdf"
+              },
+              {
+                "doc_id": "2656",
+                "doc_name": "revenue2019.pdf"
+              }
+            ]
+          }
+        ],
+        "documents": [
+          {
+            "doc_id": "4224",
+            "doc_name": "revenue_summary.pdf"
+          }
+        ]
+      },
+      {
+        "identity": "914213",
+        "catalog_name": "1.2 Diverse",
+        "catalogs": [],
+        "documents": [
+          {
+            "doc_id": "63213",
+            "doc_name": "bannanas.pdf"
+          },
+          {
+            "doc_id": "63214",
+            "doc_name": "apples.pdf"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "identity": "523405923",
+    "catalog_name": "2. Developer diaries",
+    "catalogs": [
+      {
+        "identity": "11121212",
+        "catalog_name": "2.1 Gagi",
+        "catalogs": [
+          {
+            "identity": "12",
+            "catalog_name": "2.1.1 2012",
+            "catalogs": [
+              {
+                "identity": "13",
+                "catalog_name": "April",
+                "documents": [
+                  {
+                    "doc_id": "41414444",
+                    "doc_name": "norge.pdf"
+                  },
+                  {
+                    "doc_id": "5454000",
+                    "doc_name": "serbia.pdf"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "1453452452",
+            "catalog_name": "2.1.2 2013"
+          }
+        ]
+      }
+    ]
+  }
+]
